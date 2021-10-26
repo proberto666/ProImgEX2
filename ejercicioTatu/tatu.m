@@ -1,2 +1,12 @@
-tat=imread('Tatuaje.png');
-imshow(tat);
+tat = imread('Tatuaje.png');
+ante = imread('ante.jpeg');
+tat=im2bw(tat);
+tat=imcomplement(double(tat));
+tat=imrotate(tat,10);
+imgAux= 255*ones(1536, 2048, 'double');
+imgAux = imfuse(imgAux,tat,'blend');
+imgAux = im2bw(imcomplement(imgAux));
+imgAux=imtranslate(imgAux,[617, 642],'FillValues',255);
+final=ante.*uint8(imgAux);
+figure(1);
+imshow(final);
